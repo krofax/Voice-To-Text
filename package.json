@@ -4,8 +4,11 @@
   "description": "A speech recognition app",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "browser-sync start --directory --server --files \"*.css, *.html, *.js\""
   },
   "author": "Beveloper",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "browser-sync": "^2.12.5 <2.23.2"
+  }
 }
