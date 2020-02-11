@@ -138,6 +138,12 @@ recognition.addEventListener('result', function (e) {
     p = document.createElement('p');
     words.appendChild(p);
   }
+
+  if (transcript.includes('heading')) {
+    p.style.fontSize = "30px";
+    p.style.textDecoration = "underline";
+    transcript.replace('heading', '');
+  }
 });
 recognition.addEventListener('end', recognition.start); //get the start button
 
@@ -146,6 +152,35 @@ startBtn.addEventListener('click', startWriting); //function that triggers the b
 
 function startWriting() {
   recognition.start();
+} //get the stop button
+
+
+var stopBtn = document.querySelector('.stop');
+stopBtn.addEventListener('click', stopWriting);
+
+function renderPage() {
+  var countWords = document.querySelector('.words').textContent;
+
+  if (countWords.length >= 400) {
+    var storeField = localStorage.setItem(countWords, countWords);
+    document.querySelector('.words').innerHTML = '';
+  } else {
+    alert('He no work ooh!!');
+  }
+} //function that stops recording 
+
+
+function stopWriting() {
+  // recognition.abort()
+  //count words
+  var totalWords = document.querySelector('.words').textContent;
+
+  if (totalWords.length >= 20) {
+    console.log('The words are greater than 30', totalWords.length);
+    renderPage();
+  } else {
+    console.log('its less than');
+  }
 } //get download button
 
 
@@ -153,48 +188,20 @@ var downloadBtn = document.querySelector('.save');
 downloadBtn.addEventListener('click', getContent);
 
 function getContent() {
-  // let data = document.querySelector('.words').textContent;
-  //https://pdf-downloader-speech.herokuapp.com
-  var data = 'im a text been coverted to a pdf';
-  console.log(data);
-  fetch('https://pdf-downloader-speech.herokuapp.com/pdf', {
-    mode: 'no-cors'
-  }, {
-    cache: 'no-cache'
-  }, {
+  var content = document.querySelector('.words').textContent;
+  console.log(content);
+  fetch('http://localhost:8080/pdf', {
     method: 'POST',
+    mode: 'no-cors',
+    body: content,
     headers: {
       'Content-Type': 'application/pdf'
-    },
-    body: JSON.stringify(data)
-  }).then(function (response) {
-    return response.json();
-  }).then(function (data) {
-    console.log('Success:', data);
-  }).catch(function (error) {
-    console.error('Error:', error);
+    }
+  }).then(function (res) {
+    return console.log('it worked!!!!');
   });
-} // async function postData(url = '', data = {}) {
-//   // Default options are marked with *
-//   const response = await fetch(url, {
-//     method: 'POST', // *GET, POST, PUT, DELETE, etc.
-//     mode: 'cors', // no-cors, *cors, same-origin
-//     cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
-//     credentials: 'same-origin', // include, *same-origin, omit
-//     headers: {
-//       'Content-Type': 'application/json'
-//       // 'Content-Type': 'application/x-www-form-urlencoded',
-//     },
-//     redirect: 'follow', // manual, *follow, error
-//     referrerPolicy: 'no-referrer', // no-referrer, *client
-//     body: JSON.stringify(data) // body data type must match "Content-Type" header
-//   });
-//   return await response.json(); // parses JSON response into native JavaScript objects
+} // function countWords() {
 // }
-// postData('http://localhost:8080/pdf', { answer: 'im a string ooh' })
-//   .then((data) => {
-//     console.log(data); // JSON data parsed by `response.json()` call
-//   });
 },{}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
@@ -223,7 +230,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52642" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50274" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

@@ -5,8 +5,9 @@
   "main": "script.js",
   "scripts": {
     "start": "browser-sync start --directory --server --files \"*.css, *.html, *.js\"",
-    "dev": "parcel index.html",
-    "build": "parcel build index.html"
+    "dev": "npm run watch:css && parcel index.html",
+    "build": "parcel build index.html",
+    "watch:css": "postcss css/tailwind.css -o css/style.css -w"
   },
   "proxy": "http://localhost:8080",
   "author": "Beveloper",
@@ -19,6 +20,7 @@
   "dependencies": {
     "@babel/core": "^7.7.7",
     "@babel/polyfill": "^7.7.0",
-    "axios": "^0.19.0"
+    "axios": "^0.19.0",
+    "tailwindcss": "^1.2.0"
   }
 }
